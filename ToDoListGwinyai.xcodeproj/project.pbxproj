@@ -7,23 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		841321E029AB9A1E00CF8914 /* ToDoListGwinyai.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 841321DE29AB9A1E00CF8914 /* ToDoListGwinyai.xcdatamodeld */; };
+		8463035629AE62E20060138E /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8463035529AE62E20060138E /* Validation.swift */; };
 		84E9143929A3D86D002F5D91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E9143829A3D86D002F5D91 /* AppDelegate.swift */; };
 		84E9143B29A3D86D002F5D91 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E9143A29A3D86D002F5D91 /* SceneDelegate.swift */; };
-		84E9143D29A3D86D002F5D91 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E9143C29A3D86D002F5D91 /* ViewController.swift */; };
 		84E9144029A3D86D002F5D91 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84E9143E29A3D86D002F5D91 /* Main.storyboard */; };
 		84E9144229A3D86E002F5D91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84E9144129A3D86E002F5D91 /* Assets.xcassets */; };
 		84E9144529A3D86E002F5D91 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84E9144329A3D86E002F5D91 /* LaunchScreen.storyboard */; };
+		84E9144D29A3D915002F5D91 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E9144C29A3D915002F5D91 /* AddTaskViewController.swift */; };
+		84E9144F29A3D936002F5D91 /* ToDoDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E9144E29A3D936002F5D91 /* ToDoDetailsViewController.swift */; };
+		84E9145129A3D953002F5D91 /* ToDoItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E9145029A3D953002F5D91 /* ToDoItemModel.swift */; };
+		84E9145329A3D96C002F5D91 /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E9145229A3D96C002F5D91 /* ToDoListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		841321DF29AB9A1E00CF8914 /* ToDoListGwinyai.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDoListGwinyai.xcdatamodel; sourceTree = "<group>"; };
+		8463035529AE62E20060138E /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		84E9143529A3D86D002F5D91 /* ToDoListGwinyai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoListGwinyai.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84E9143829A3D86D002F5D91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84E9143A29A3D86D002F5D91 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		84E9143C29A3D86D002F5D91 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		84E9143F29A3D86D002F5D91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		84E9144129A3D86E002F5D91 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84E9144429A3D86E002F5D91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84E9144629A3D86E002F5D91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84E9144C29A3D915002F5D91 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
+		84E9144E29A3D936002F5D91 /* ToDoDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailsViewController.swift; sourceTree = "<group>"; };
+		84E9145029A3D953002F5D91 /* ToDoItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItemModel.swift; sourceTree = "<group>"; };
+		84E9145229A3D96C002F5D91 /* ToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,8 +68,13 @@
 			children = (
 				84E9143829A3D86D002F5D91 /* AppDelegate.swift */,
 				84E9143A29A3D86D002F5D91 /* SceneDelegate.swift */,
-				84E9143C29A3D86D002F5D91 /* ViewController.swift */,
 				84E9143E29A3D86D002F5D91 /* Main.storyboard */,
+				84E9144C29A3D915002F5D91 /* AddTaskViewController.swift */,
+				84E9144E29A3D936002F5D91 /* ToDoDetailsViewController.swift */,
+				84E9145029A3D953002F5D91 /* ToDoItemModel.swift */,
+				84E9145229A3D96C002F5D91 /* ToDoListViewController.swift */,
+				8463035529AE62E20060138E /* Validation.swift */,
+				841321DE29AB9A1E00CF8914 /* ToDoListGwinyai.xcdatamodeld */,
 				84E9144129A3D86E002F5D91 /* Assets.xcassets */,
 				84E9144329A3D86E002F5D91 /* LaunchScreen.storyboard */,
 				84E9144629A3D86E002F5D91 /* Info.plist */,
@@ -138,8 +153,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84E9143D29A3D86D002F5D91 /* ViewController.swift in Sources */,
 				84E9143929A3D86D002F5D91 /* AppDelegate.swift in Sources */,
+				84E9145129A3D953002F5D91 /* ToDoItemModel.swift in Sources */,
+				84E9144F29A3D936002F5D91 /* ToDoDetailsViewController.swift in Sources */,
+				84E9144D29A3D915002F5D91 /* AddTaskViewController.swift in Sources */,
+				841321E029AB9A1E00CF8914 /* ToDoListGwinyai.xcdatamodeld in Sources */,
+				84E9145329A3D96C002F5D91 /* ToDoListViewController.swift in Sources */,
+				8463035629AE62E20060138E /* Validation.swift in Sources */,
 				84E9143B29A3D86D002F5D91 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,6 +378,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		841321DE29AB9A1E00CF8914 /* ToDoListGwinyai.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				841321DF29AB9A1E00CF8914 /* ToDoListGwinyai.xcdatamodel */,
+			);
+			currentVersion = 841321DF29AB9A1E00CF8914 /* ToDoListGwinyai.xcdatamodel */;
+			path = ToDoListGwinyai.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 84E9142D29A3D86D002F5D91 /* Project object */;
 }
