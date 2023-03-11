@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class ToDoDetailsViewController: UIViewController {
     
     
@@ -20,7 +21,7 @@ class ToDoDetailsViewController: UIViewController {
     @IBOutlet weak var taskCompletionDate: UILabel!
     
     
-    var toDoItem: ToDoItemModel!
+    var toDoItem: Task!
     
     var toDoIndex: Int!
     
@@ -42,9 +43,9 @@ class ToDoDetailsViewController: UIViewController {
         
         let formatter = DateFormatter()
         
-        formatter.dateFormat = "MMM dd, yyyy hh:mm"
+        formatter.dateFormat = "dd MMM, yyyy hh:mm"
         
-        let taskDate = formatter.string(from: toDoItem.completionDate!)
+        let taskDate = formatter.string(from: toDoItem.completionDate)
         
         taskCompletionDate.text = taskDate
         
@@ -85,9 +86,19 @@ class ToDoDetailsViewController: UIViewController {
     
     func completeTask(alert: UIAlertController){
         
-        toDoItem.isComplete = true
+       // toDoItem.isComplete = true
         
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        guard let realm = LocalDataBaseManager.realm else {
+            return
+        }
+        do {
+            try realm.write{
+                toDoItem.isComplete = true
+            }
+        }catch let error as NSError {
+            print(error.localizedDescription)
+            return
+        }
         
         //delegate?.update(task: toDoItem, index: toDoIndex)
         delegate?.update()

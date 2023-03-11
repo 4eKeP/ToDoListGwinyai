@@ -6,35 +6,25 @@
 //
 
 import UIKit
+import RealmSwift
 
 protocol ToDoListDelegate: AnyObject {
-    
-    //func update(task: ToDoItemModel, index: Int)
     func update()
-    
 }
 
 class ToDoListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
-    var toDoItems: [ToDoItemModel] {
-        
-        do {
-            
-            return try context.fetch(ToDoItemModel.fetchRequest())
-            
-        } catch {
-            
-            print("Couldn't fetch data")
-            
+    var toDoItems: Results<Task>?{
+        get {
+            guard let realm = LocalDataBaseManager.realm else {
+                return nil
+            }
+            return realm.objects(Task.self)
         }
-        return [ToDoItemModel]()
-        
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,7 +39,7 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))
         
         //передача данных с помощью NSNotification
-        NotificationCenter.default.addObserver(self, selector: #selector(addNewTask(_ :)), name: NSNotification.Name.init(rawValue: "com.todolistapp.addtask"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(addNewTask(_ :)), name: NSNotification.Name(rawValue: "AddTask"), object: nil)
      
     }
     
@@ -120,13 +110,21 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let delete = UIContextualAction(style: .destructive, title: "Delete") { action, view, success in
             
-            let toDoItem = self.toDoItems[indexPath.row]
-            
-            self.context.delete(toDoItem)
-            
-            (UIApplication.shared.delegate as! AppDelegate).saveContext()
-            
             //self.toDoItems.remove(at: indexPath.row)
+            
+            guard let realm = LocalDataBaseManager.realm else {
+                
+                return
+            }
+            do{
+                try realm.write {
+                    realm.delete(self.toDoItems![indexPath.row])
+                }
+            }
+            catch let error as NSError {
+                print(error.localizedDescription)
+                return
+            }
             
             self.tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
         }
@@ -136,7 +134,7 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let selectedItem = toDoItems[indexPath.row]
+        let selectedItem = toDoItems![indexPath.row]
         
         let toDoTuple = (indexPath.row, selectedItem)
         
@@ -147,12 +145,12 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       
-        return toDoItems.count
+        return toDoItems?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
-        let toDoItem = toDoItems[indexPath.row]
+        let toDoItem = toDoItems![indexPath.row]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItem")!
         
@@ -175,7 +173,7 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
             
             guard let destinationVC = segue.destination as? ToDoDetailsViewController else {return}
             
-            guard let toDoTuple = sender as? (Int, ToDoItemModel) else {return}
+            guard let toDoTuple = sender as? (Int, Task) else {return}
             
             destinationVC.toDoIndex = toDoTuple.0
             
@@ -188,7 +186,7 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     deinit {
         
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.init(rawValue: "com.todolistapp.addtask"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "AddTask"), object: nil)
             
         }
         

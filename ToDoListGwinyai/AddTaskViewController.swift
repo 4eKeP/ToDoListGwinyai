@@ -238,31 +238,39 @@ class AddTaskViewController: UIViewController {
             return
         }
         
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
-        let toDoItem = ToDoItemModel(context: context)
+        guard let realm = LocalDataBaseManager.realm else {
+            reportError(title: "Error", message: "new task could not be created")
+            return
+        }
+        let nextTaskId = (realm.objects(Task.self).max(ofProperty: "id") as Int? ?? 0) + 1
         
-        toDoItem.name = taskName
+        //let newTask = Task(name: taskName, details: taskDetails, completionDate: complitionDate)
+        let newTask = Task()
+        newTask.id = nextTaskId
         
-        toDoItem.details = taskDetails
+        newTask.name = taskName
+        newTask.details = taskDetails
+        newTask.completionDate = complitionDate
+        newTask.isComplete = false
         
-        toDoItem.completionDate = complitionDate
+        do {
+            try realm.write{
+                realm.add(newTask)
+            }
+        }catch let error as NSError {
+            print(error.localizedDescription)
+            reportError(title: "Error", message: "A new task could not be created")
+            return
+        }
         
-        toDoItem.isComplete = false
-        
-        toDoItem.startDate = Date()
-        
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
         
         
-        //let toDoItem = ToDoItemModel(name: taskName, details: taskDetails, completionDate: complitionDate)
-        //передача данных с помощью NSNotification
+    
         
-        //let toDoDict: [String: ToDoItemModel] = ["Task": toDoItem]
-        NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: "com.todolistapp.addtask"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name.init("AddTask"), object: nil)
         
-        //NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: "com.todolistapp.addtask"), object: nil, userInfo: toDoDict)
-
+       
         dismiss(animated: true)
         
         // для более продвинутых проверок нужно использовать regular expressions Swift
