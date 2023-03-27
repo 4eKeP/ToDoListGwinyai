@@ -21,7 +21,7 @@ public class LocalDataBaseManager{
         
     }
 }
-
+/*
 class Task: Object {
     
     @objc dynamic var id = 0
@@ -37,9 +37,9 @@ class Task: Object {
     @objc dynamic var startDate = Date()
     @objc dynamic var isComplete = false
 }
-/*
+*/
 class Task: Object {
-    @Persisted(primaryKey: true) var _id: ObjectId
+    @Persisted(primaryKey: true) var id = 0
     @Persisted var name: String = ""
     @Persisted var details: String = ""
     @Persisted var completionDate = Date()
@@ -48,16 +48,18 @@ class Task: Object {
     
     
     
-    convenience init(name: String, details: String, completionDate: Date) {
+    
+    convenience init(name: String, details: String, completionDate: Date, id: Int) {
         
         self.init()
+        self.id = id
         self.name = name
         self.details = details
         self.completionDate = completionDate
         
     }
 }
- */
+ 
 
 /*
 struct ToDoItemModel {

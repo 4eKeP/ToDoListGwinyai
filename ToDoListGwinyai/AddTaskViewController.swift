@@ -244,8 +244,9 @@ class AddTaskViewController: UIViewController {
             return
         }
         let nextTaskId = (realm.objects(Task.self).max(ofProperty: "id") as Int? ?? 0) + 1
-        
-        //let newTask = Task(name: taskName, details: taskDetails, completionDate: complitionDate)
+        //let nextTaskId = Task.self.primaryKey()?.max() as Int ?? 0
+        let newTask = Task(name: taskName, details: taskDetails, completionDate: complitionDate, id: nextTaskId)
+        /*
         let newTask = Task()
         newTask.id = nextTaskId
         
@@ -253,7 +254,7 @@ class AddTaskViewController: UIViewController {
         newTask.details = taskDetails
         newTask.completionDate = complitionDate
         newTask.isComplete = false
-        
+        */
         do {
             try realm.write{
                 realm.add(newTask)
